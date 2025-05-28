@@ -1,0 +1,131 @@
+.auth-form {
+  width: 428px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-title {
+  display: flex;
+  align-items: center;
+  gap: 69px;
+  margin-bottom: 32px;
+}
+
+.auth-title a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-weight: 400;
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+.auth-title a.active {
+  opacity: 1;
+}
+
+.auth-inputs {
+  margin-bottom: 30px;
+}
+
+.auth-inputs-subtitle {
+  font-weight: 400;
+  font-size: 24px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+.auth-input {
+  margin-bottom: 15px;
+}
+
+.auth-input:last-child {
+  margin-bottom: 0;
+}
+
+.auth-select {
+  margin-bottom: 15px;
+}
+
+.select {
+  width: 390px;
+  padding: 25px;
+  outline: none;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 20px;
+  color: #000000;
+}
+
+.input {
+  width: 390px;
+  padding: 25px;
+  outline: none;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 0.625rem;
+  font-weight: 400;
+  font-size: 22px;
+  color: #000000;
+}
+
+.input::placeholder {
+  color: #00000080;
+}
+
+.auth-radio-items {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.auth-radio-item {
+  padding: 30px 15px 15px 15px;
+  border: 2px solid #ffa700;
+  border-radius: 30px;
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.auth-radio-item label {
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  position: relative;
+  /*user-select: none;*/
+  cursor: pointer;
+}
+
+.auth-radio-item label span {
+  font-weight: 700;
+  color: #25c6f9;
+}
+
+.auth-radio-item input[type=radio] {
+  display: none;
+}
+
+.auth-radio-item label:before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  border: 1px solid #ffa700;
+  border-radius: 50%;
+  left: 0;
+  top: -20px;
+  background: transparent;
+}
+
+.auth-radio-item input[type=radio]:checked + label:before {
+  background: #ffa700;
+}
+

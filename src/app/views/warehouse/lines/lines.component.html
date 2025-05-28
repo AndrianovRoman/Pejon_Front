@@ -1,0 +1,22 @@
+<div class="lines">
+
+  <ul class="breadcrumb">
+    <li><a routerLink="/">Главная</a></li>
+    <li><a routerLink="/warehouse">Склады</a></li>
+    <!-- <li><a [routerLink]="['/warehouse', warehouseId, 'lines']">Линии</a></li> -->
+    <li>Линии склада № {{warehouseId}}</li>
+  </ul>
+
+  <h1 class="lines-title">
+    Склады
+  </h1>
+  <div class="lines-items">
+    <div class="lines-item" *ngFor="let line of lines">
+      <div class="lines-item-img">
+        <img src="assets/images/Склад_без_фона.png" alt="Линия">
+      </div>
+      <div class="lines-item-title">{{ line.title }}</div>
+      <button class="button" [routerLink]="[line.id]">Перейти</button>
+    </div>
+  </div>
+</div>

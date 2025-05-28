@@ -1,0 +1,20 @@
+<div class="warehouse">
+
+  <ul class="breadcrumb">
+    <li><a routerLink="/">Главная</a></li>
+    <li>Склады</li>
+  </ul>
+
+  <h1 class="warehouse-title">
+    Склады
+  </h1>
+  <div class="warehouse-items">
+    <div class="warehouse-item" *ngFor="let warehouse of warehouses">
+      <div class="warehouse-item-img">
+        <img src="assets/images/Склад_без_фона.png" alt="Склад">
+      </div>
+      <div class="warehouse-item-title">{{ warehouse.title }}</div>
+      <button class="button" [routerLink]="[warehouse.id] + '/lines'">Перейти</button>
+    </div>
+  </div>
+</div>

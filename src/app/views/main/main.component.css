@@ -1,0 +1,21 @@
+
+.main {
+  padding: 100px 0;
+}
+
+.main-title {
+  font-size: 60px;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 33px;
+  text-align: center;
+}
+
+.main-subtitle {
+  font-size: 30px;
+  color: #ffffff;
+  opacity: 0.8;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}

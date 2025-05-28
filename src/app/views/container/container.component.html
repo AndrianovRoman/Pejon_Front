@@ -1,0 +1,20 @@
+<div class="container">
+
+  <ul class="breadcrumb">
+    <li><a routerLink="/">Главная</a></li>
+    <li>Контейнеры</li>
+  </ul>
+
+  <h1 class="container-title">
+    Контейнеры
+  </h1>
+  <div class="container-items">
+    <div class="container-item" *ngFor="let container of containers">
+      <div class="container-item-img">
+        <img src="assets/images/Контейнер_без_фона.png" alt="Контейнер">
+      </div>
+      <div class="container-item-title">{{ container.title }}</div>
+      <button class="button" [routerLink]="[container.id]">Перейти</button>
+    </div>
+  </div>
+</div>
