@@ -25,8 +25,6 @@ export class LinesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.warehouseId = this.activatedRoute.snapshot.paramMap.get('warehouseId');
-    console.log(this.warehouseId)
   }
 
 }

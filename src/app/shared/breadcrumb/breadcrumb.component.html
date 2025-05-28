@@ -1,0 +1,12 @@
+<ul class="breadcrumb">
+    <li><a routerLink="/">Главная</a></li>
+
+    <li *ngFor="let crumb of breadcrumbs">
+        <a *ngIf="!isLast(crumb)" [routerLink]="crumb.url">{{ crumb.label }}</a>
+        <span *ngIf="isLast(crumb)">{{ crumb.label }}</span>
+    </li>
+
+    <!-- +<li><a routerLink="/warehouse">Склады</a></li> -->
+    <!-- <li><a [routerLink]="['/warehouse', warehouseId, 'lines']">Линии</a></li> -->
+    <!-- <li>Линии склада № {{warehouseId}}</li> -->
+</ul>

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { WarehouseRoutingModule } from './warehouse-routing.module';
 import {WarehouseComponent} from "./warehouse.component";
 import { LinesComponent } from './lines/lines.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { LinesComponent } from './lines/lines.component';
   ],
   imports: [
     CommonModule,
-    WarehouseRoutingModule
+    WarehouseRoutingModule,
+    SharedModule
   ]
 })
 export class WarehouseModule { }
