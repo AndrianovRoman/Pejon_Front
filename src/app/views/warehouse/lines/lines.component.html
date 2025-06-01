@@ -1,14 +1,58 @@
 <div class="lines">
+  <div class="lines-actions">
+    <button mat-fab class="lines-button-back" title="Назад" (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="lines-actions-extra" *ngIf="role === 'Админ'">
+      <button mat-raised-button class="lines-button-add" (click)="openLineDialog(null)">
+        Создать линию
+      </button>
+      <button mat-raised-button class="lines-button-add" (click)="openZoneDialog(null)">
+        Создать зону
+      </button>
+    </div>
+  </div>
   <h1 class="lines-title">
-    Склады
+    Линии склада <span>{{warehouseName}}</span>
   </h1>
   <div class="lines-items">
     <div class="lines-item" *ngFor="let line of lines">
-      <div class="lines-item-img">
-        <img src="assets/images/Склад_без_фона.png" alt="Линия">
+      <div class="lines-item-title">{{ line.name }}</div>
+      <div class="lines-item-actions">
+        <button *ngIf="role === 'Админ'" class="button button-edit" mat-mini-fab (click)="openLineDialog(line)" title="Редактировать">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="role === 'Админ'" class="button button-delete" mat-mini-fab (click)="deleteLine(line)" title="Удалить">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button class="button" mat-fab [routerLink]="'lines/' + [line.id]">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
       </div>
-      <div class="lines-item-title">{{ line.title }}</div>
-      <button class="button" [routerLink]="[line.id]">Перейти</button>
     </div>
   </div>
+
+  <div class="zone">
+    <h1 class="zone-title">
+      Зона склада <span>{{warehouseName}}</span>
+    </h1>
+    <div class="zone-items">
+      <div class="zone-item" *ngFor="let zone of zones">
+        <div class="zone-item-title">{{ zone.name }}</div>
+
+        <div class="zone-item-actions">
+          <button *ngIf="role === 'Админ'" class="button button-edit" mat-mini-fab (click)="openZoneDialog(zone)" title="Редактировать">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button *ngIf="role === 'Админ'" class="button button-delete" mat-mini-fab (click)="deleteZone(zone)" title="Удалить">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button class="button" mat-fab [routerLink]="'zone/' + [zone.id]">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

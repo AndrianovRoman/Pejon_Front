@@ -1,0 +1,37 @@
+<div class="shelves">
+  <div class="shelves-actions">
+    <button mat-fab class="shelves-button-back" title="Назад" (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button mat-raised-button *ngIf="role === 'Админ'" class="shelves-button-add" (click)="openShelfDialog(null)">
+      Создать стеллаж
+    </button>
+  </div>
+  <h1 class="shelves-title">
+    Стеллажи линии <span>{{lineName}}</span>
+  </h1>
+  <div class="shelves-items">
+    <div class="shelves-item" *ngFor="let shelf of shelves">
+      <div class="shelves-item-img">
+        <img src="assets/images/shelf.png" alt="Стеллаж">
+      </div>
+      <div class="shelves-item-title">{{ shelf.name }}</div>
+      <div class="shelves-item-cells">
+        <div class="shelves-item-cell" *ngFor="let cell of getSortedCells(shelf.cellDto)">
+          <button (click)="openDialog(shelf.id, cell ? cell : null)">
+            {{cell.transportContainer ? cell.transportContainer.name : 'Пусто'}}
+            <span>{{cell ? cell.name : 'Пусто'}}</span>
+          </button>
+        </div>
+      </div>
+      <div class="shelves-item-actions">
+        <button *ngIf="role === 'Админ'" class="button button-edit" mat-mini-fab (click)="openShelfDialog(shelf)" title="Редактировать">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="role === 'Админ'" class="button button-delete" mat-mini-fab (click)="deleteShelf(shelf)" title="Удалить">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

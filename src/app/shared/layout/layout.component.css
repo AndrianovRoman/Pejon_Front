@@ -60,6 +60,15 @@
   height: calc(100% - 3.65rem);
   cursor: pointer;
 }
+
+.sidenav-nav .sidenav-nav-item:last-child {
+  margin-top: auto;
+}
+
+.sidenav-nav .sidenav-nav-item:last-child .sidenav-nav-link {
+  margin-bottom: 10px;
+}
+
 .sidenav-nav .sidenav-nav-item {
   width: 100%;
   margin-bottom: 0.625rem;

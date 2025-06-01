@@ -11,7 +11,9 @@
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let data of navData">
       <a
+        *ngIf="data.isLogged"
         class="sidenav-nav-link"
+        (click)="data.routeLink === '/logout' ? logout() : ''"
         [routerLink]="[data.routeLink]"
         [routerLinkActiveOptions]="data.routeLink === '' ? { exact: true } : { exact: false }"
         routerLinkActive="active"

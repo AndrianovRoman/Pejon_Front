@@ -1,0 +1,63 @@
+.cells{
+  padding: 0 50px;
+}
+
+.cells-button-back {
+  background-color: #ffa700;
+}
+
+.cells-title {
+  font-size: 60px;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.cells-title span {
+  color: #ffa700;
+}
+
+.cells-items {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.cells-item {
+  border-radius: 0.625rem;
+  background-color: #ffa700;
+  max-width: 250px;
+}
+
+.cells-item button {
+  width: 100%;
+  height: 100%;
+  padding: 35px 30px;
+  font-size: 36px;
+  color: #ffffff;
+  border: 0;
+  border-radius: 0.625rem;
+  background-color: #ffa700;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  cursor: pointer;
+}
+
+.cells-item button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.cells-item button span {
+  font-size: 16px;
+}
+
+.cells-item button.button-add{
+  font-size: 70px;
+  padding: 0;
+  width: 250px;
+}

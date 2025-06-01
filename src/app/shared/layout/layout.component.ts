@@ -6,6 +6,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import {AuthService} from "../../core/auth/auth.service";
 
 @Component({
   selector: 'app-layout',
@@ -45,36 +46,66 @@ export class LayoutComponent implements OnInit {
     }
   }
 
+  isLogged: boolean = false;
   collapsed: boolean = true;
   screenWidth: number = 0;
-  navData = [
-    {
-      routeLink: '',
-      icon: 'bi bi-house',
-      label: 'Главная',
-    },
-    {
-      routeLink: '/login',
-      icon: 'bi bi-person',
-      label: 'Войти',
-    },
-    {
-      routeLink: '/warehouse',
-      icon: 'bi bi-houses',
-      label: 'Склады',
-    },
-    {
-      routeLink: '/container',
-      icon: 'bi bi-box-seam',
-      label: 'Контейнеры',
-    },
-  ]
+  navData: { routeLink: string, icon: string, label: string, isLogged: boolean, }[] = [];
+  userId: string | null = null;
 
-  constructor() {
+  constructor(private authService: AuthService) {
+    this.isLogged = this.authService.getIsLoggedIn();
+    this.userId = this.authService.getUserInfo();
+    // console.log(this.isLogged)
+    this.createNavbar()
   }
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+
+    this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
+      this.isLogged = isLoggedIn;
+      this.createNavbar()
+      // console.log(this.isLogged)
+      // this.authService.getIsRole().subscribe(data => {
+      //   console.log(data.nameRole);
+      //   this.role = data.nameRole
+      // });
+    });
+  }
+
+  createNavbar() {
+    return this.navData = [
+      {
+        routeLink: '',
+        icon: 'bi bi-house',
+        label: 'Главная',
+        isLogged: true,
+      },
+      {
+        routeLink: '/warehouse',
+        icon: 'bi bi-houses',
+        label: 'Склады',
+        isLogged: this.isLogged,
+      },
+      {
+        routeLink: '/container',
+        icon: 'bi bi-box-seam',
+        label: 'Контейнеры',
+        isLogged: this.isLogged,
+      },
+      {
+        routeLink: '/user/' + this.userId,
+        icon: 'bi bi-person',
+        label: 'Профиль',
+        isLogged: this.isLogged,
+      },
+      {
+        routeLink: this.isLogged ? '/logout' : '/login',
+        icon: this.isLogged ? 'bi bi-door-closed' : 'bi bi-door-open',
+        label: this.isLogged ? 'Выйти' : 'Войти',
+        isLogged: true,
+      },
+    ];
   }
 
   toggleCollapsed(): void {
@@ -99,6 +130,10 @@ export class LayoutComponent implements OnInit {
     }
 
     return styleClass;
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 }

@@ -8,9 +8,9 @@
 
         <div class="auth-input">
           <input type="text" class="input"
-                 [ngStyle]="{'border-color': loginForm.get('email')?.invalid
-                  && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched) ? 'red' : ''}"
-                 placeholder="Email" formControlName="email">
+                 [ngStyle]="{'border-color': loginForm.get('login')?.invalid
+                  && (loginForm.get('login')?.dirty || loginForm.get('login')?.touched) ? 'red' : ''}"
+                 placeholder="Login" formControlName="login">
         </div>
         <div class="auth-input">
           <input type="password" class="input"

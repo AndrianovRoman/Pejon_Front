@@ -1,0 +1,19 @@
+<div class="cells">
+  <button mat-fab class="cells-button-back" title="Назад" (click)="back()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1 class="cells-title">
+    Ячейки <span>{{containerName}}</span>
+  </h1>
+  <div class="cells-items">
+    <div class="cells-item" *ngFor="let cell of cells">
+      <button (click)="openDialog(cell)">
+        {{cell.transportContainer.name}}
+        <span>{{cell.name}}</span>
+      </button>
+    </div>
+    <div class="cells-item" *ngIf="role === 'Админ'">
+      <button class="button button-add" (click)="openDialog(null)" title="Добавить ячейку">+</button>
+    </div>
+  </div>
+</div>

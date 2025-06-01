@@ -5,10 +5,19 @@
   <div class="warehouse-items">
     <div class="warehouse-item" *ngFor="let warehouse of warehouses">
       <div class="warehouse-item-img">
-        <img src="assets/images/Склад_без_фона.png" alt="Склад">
+        <img src="assets/images/warehouse.png" alt="Склад">
       </div>
-      <div class="warehouse-item-title">{{ warehouse.title }}</div>
-      <button class="button" [routerLink]="[warehouse.id] + '/lines'">Перейти</button>
+      <div class="warehouse-item-title">{{ warehouse.name }}</div>
+      <button class="button" [routerLink]="[warehouse.id]">Перейти</button>
+      <button *ngIf="role === 'Админ'" class="button button-edit" mat-mini-fab (click)="openDialog(warehouse)" title="Редактировать">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="role === 'Админ'" class="button button-delete" mat-mini-fab (click)="deleteItem(warehouse)" title="Удалить">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div class="warehouse-item warehouse-item-add" *ngIf="role === 'Админ'">
+      <button class="button button-add" (click)="openDialog(null)">+</button>
     </div>
   </div>
 </div>

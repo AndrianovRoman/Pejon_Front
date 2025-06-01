@@ -1,0 +1,31 @@
+<div class="dialog">
+  <h1 class="dialog-title" mat-dialog-title>
+    {{title}}
+  </h1>
+  <div mat-dialog-content>
+
+    <ul class="dialog-list">
+      <li>
+        <mat-form-field appearance="fill" class="dialog-list-item">
+          <mat-label>Название склада</mat-label>
+          <input matInput [(ngModel)]="data.name">
+          <button *ngIf="data.name" matSuffix mat-icon-button aria-label="Clear" (click)="data.name=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </li>
+    </ul>
+
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button mat-dialog-close class="dialog-actions-close">Закрыть</button>
+    <button
+      mat-button
+      (click)="save()"
+      class="dialog-actions-send"
+    >
+      Сохранить
+    </button>
+  </div>
+</div>
+

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {ContainerType} from "../../../types/container.type";
+import {ContainerService} from "../../shared/services/container.service";
+import {MatDialog} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {CreateUpdateDialogComponent} from "./create-update-dialog/create-update-dialog.component";
+
 
 @Component({
   selector: 'app-container',
@@ -7,44 +13,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContainerComponent implements OnInit {
 
-  containers = [
-    {
-      title: 'Контейнер 1',
-      id: '1',
-    },
-    {
-      title: 'Контейнер 2',
-      id: '2',
-    },
-    {
-      title: 'Контейнер 3',
-      id: '3',
-    },
-    {
-      title: 'Контейнер 4',
-      id: '4',
-    },
-    {
-      title: 'Контейнер 5',
-      id: '5',
-    },
-    {
-      title: 'Контейнер 6',
-      id: '6',
-    },
-    {
-      title: 'Контейнер 7',
-      id: '7',
-    },
-    {
-      title: 'Контейнер 8',
-      id: '8',
-    },
-  ]
+  containers: ContainerType[] = [];
+  role: string | undefined;
 
-  constructor() { }
+  constructor(private containerService: ContainerService,
+              public dialog: MatDialog,
+              private _snackBar: MatSnackBar) {
+    this.role = 'Админ'
+  }
 
   ngOnInit(): void {
+    this.loadItems();
+  }
+
+  loadItems() {
+    this.containerService.getAllContainers().subscribe(data => {
+      this.containers = data;
+      this.containers.sort((a, b) => a.id - b.id)
+      console.log(data)
+    })
+  }
+
+  openDialog(container: ContainerType | null) {
+    console.log('create container');
+    const dialogRef = this.dialog.open(CreateUpdateDialogComponent, {
+      data: {
+        id: container ? container.id : null,
+        name: container ? container.name : null,
+        capacity: container ? container.capacity : null,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result === 'update') {
+          this._snackBar.open('Контейнер успешно обновлен')
+        } else {
+          this._snackBar.open('Контейнер успешно добавлен')
+        }
+        this.loadItems()
+      }
+    });
+  }
+
+  deleteItem(container: ContainerType) {
+    if (confirm('Вы уверены что хотите удалить контейнер: ' + container.name)) {
+      console.log('Удаление')
+      this._snackBar.open(container.name + ' успешно удален')
+      this.containerService.deleteContainerById(container.id).subscribe(data => {
+        this.loadItems()
+      });
+    } else {
+      this._snackBar.open('Удаление отменено')
+    }
   }
 
 }

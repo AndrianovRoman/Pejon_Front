@@ -5,10 +5,19 @@
   <div class="container-items">
     <div class="container-item" *ngFor="let container of containers">
       <div class="container-item-img">
-        <img src="assets/images/Контейнер_без_фона.png" alt="Контейнер">
+        <img src="assets/images/container.png" alt="Контейнер">
       </div>
-      <div class="container-item-title">{{ container.title }}</div>
-      <button class="button" [routerLink]="[container.id]">Перейти</button>
+      <div class="container-item-title">{{ container.name }}</div>
+      <button class="button" [routerLink]="[container.id] + '/cells'">Перейти</button>
+      <button *ngIf="role === 'Админ'" class="button button-edit" mat-mini-fab (click)="openDialog(container)" title="Редактировать">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="role === 'Админ'" class="button button-delete" mat-mini-fab (click)="deleteItem(container)" title="Удалить">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div class="container-item container-item-add" *ngIf="role === 'Админ'">
+      <button class="button button-add" (click)="openDialog(null)">+</button>
     </div>
   </div>
 </div>

@@ -1,0 +1,60 @@
+<div class="dialog">
+  <h1 class="dialog-title" mat-dialog-title>
+    Редактирование ячейки <span>{{cellName}}</span>
+  </h1>
+  <div mat-dialog-content>
+
+    <ul class="dialog-list">
+      <li>
+        <mat-form-field appearance="fill" class="dialog-list-item">
+          <mat-label>Транспортный контейнер</mat-label>
+          <mat-select
+            [(value)]="transportContainerControl"
+          >
+            <mat-option [value]="0">None</mat-option>
+            <mat-option
+              *ngFor="let transportContainer of transportContainers"
+              [value]="transportContainer.id"
+            >
+              {{transportContainer.name}}
+            </mat-option>
+          </mat-select>
+<!--          <input matInput [(ngModel)]="data.transportContainer.name">-->
+          <button *ngIf="data.transportContainer.name" matSuffix mat-icon-button aria-label="Clear" (click)="data.transportContainer.name=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </li>
+      <li>
+        <mat-form-field appearance="fill" class="dialog-list-item">
+          <mat-label>Название ячейки</mat-label>
+          <input matInput [(ngModel)]="data.name">
+          <button *ngIf="data.name" matSuffix mat-icon-button aria-label="Clear" (click)="data.name=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </li>
+      <li>
+        <mat-form-field appearance="fill" class="dialog-list-item">
+          <mat-label>Описание ячейки</mat-label>
+          <input matInput [(ngModel)]="data.description">
+          <button *ngIf="data.description" matSuffix mat-icon-button aria-label="Clear" (click)="data.description=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </li>
+    </ul>
+
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button mat-dialog-close class="dialog-actions-close">Закрыть</button>
+    <button
+      mat-button
+      (click)="sendApplication()"
+      class="dialog-actions-send"
+    >
+      Отправить заявку на редактирование
+    </button>
+  </div>
+</div>
+
