@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Observable, Subject} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {CommonType} from "../../../types/common.type";
 
 @Injectable({
   providedIn: 'root'
@@ -39,9 +40,9 @@ export class AuthService {
     return this.isLogged;
   }
 
-  public getIsRole(): Observable<{nameRole: string}> {
+  public getIsRole(): Observable<CommonType> {
     const id = localStorage.getItem(this.idKey);
-    return this.http.get<{nameRole: string}>(environment.url + 'role/' + id);
+    return this.http.get<CommonType>(environment.url + 'role/user/' + id);
   }
 
   public getUserInfo(): string | null {

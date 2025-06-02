@@ -52,6 +52,8 @@ export class LayoutComponent implements OnInit {
   navData: { routeLink: string, icon: string, label: string, isLogged: boolean, }[] = [];
   userId: string | null = null;
 
+  role: string | undefined;
+
   constructor(private authService: AuthService) {
     this.isLogged = this.authService.getIsLoggedIn();
     this.userId = this.authService.getUserInfo();
@@ -66,10 +68,9 @@ export class LayoutComponent implements OnInit {
       this.isLogged = isLoggedIn;
       this.createNavbar()
       // console.log(this.isLogged)
-      // this.authService.getIsRole().subscribe(data => {
-      //   console.log(data.nameRole);
-      //   this.role = data.nameRole
-      // });
+      this.authService.getIsRole().subscribe(data => {
+        this.role = data.name
+      });
     });
   }
 
@@ -92,6 +93,12 @@ export class LayoutComponent implements OnInit {
         icon: 'bi bi-box-seam',
         label: 'Контейнеры',
         isLogged: this.isLogged,
+      },
+      {
+        routeLink: '/user',
+        icon: 'bi bi-people',
+        label: 'Пользователи',
+        isLogged: this.isLogged && this.role === 'Админ',
       },
       {
         routeLink: '/user/' + this.userId,

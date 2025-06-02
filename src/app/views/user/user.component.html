@@ -1,1 +1,28 @@
-<p>user works!</p>
+<div class="users">
+  <div class="users-actions">
+    <button mat-fab class="users-button-back" title="Назад" (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="users-actions-extra" *ngIf="role === 'Админ'">
+      <button mat-raised-button class="users-button-add" (click)="openUserDialog(null)">
+        Создать пользователя
+      </button>
+    </div>
+  </div>
+  <h1 class="users-title">
+    Все <span>пользователи</span>
+  </h1>
+  <div class="users-items">
+    <div class="users-item" *ngFor="let user of users">
+      <div class="users-item-title">{{ user.name }}</div>
+      <div class="users-item-actions">
+        <button *ngIf="role === 'Админ'" class="button button-edit" mat-mini-fab (click)="openUserDialog(user)" title="Редактировать">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="role === 'Админ'" class="button button-delete" mat-mini-fab (click)="deleteUser(user)" title="Удалить">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

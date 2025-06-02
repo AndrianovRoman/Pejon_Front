@@ -4,13 +4,12 @@ import {WarehouseService} from "../../../shared/services/warehouse.service";
 import {LineType} from "../../../../types/line.type";
 import {ZoneType} from "../../../../types/zone.type";
 import {MatDialog} from "@angular/material/dialog";
-import {WarehouseType} from "../../../../types/warehouse.type";
-import {CreateUpdateDialogComponent} from "../create-update-dialog/create-update-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {LineService} from "../../../shared/services/line.service";
 import {ZoneService} from "../../../shared/services/zone.service";
 import {CreateUpdateLineDialogComponent} from "./create-update-line-dialog/create-update-line-dialog.component";
 import {CreateUpdateZoneDialogComponent} from "./create-update-zone-dialog/create-update-zone-dialog.component";
+import {AuthService} from "../../../core/auth/auth.service";
 
 @Component({
   selector: 'app-lines',
@@ -31,9 +30,12 @@ export class LinesComponent implements OnInit {
               private linaService: LineService,
               private zoneService: ZoneService,
               private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
               public dialog: MatDialog,
               private _snackBar: MatSnackBar) {
-    this.role = 'Админ'
+    this.authService.getIsRole().subscribe(data => {
+      this.role = data.name
+    });
   }
 
   ngOnInit(): void {

@@ -4,6 +4,7 @@ import {ContainerService} from "../../shared/services/container.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateUpdateDialogComponent} from "./create-update-dialog/create-update-dialog.component";
+import {AuthService} from "../../core/auth/auth.service";
 
 
 @Component({
@@ -18,8 +19,11 @@ export class ContainerComponent implements OnInit {
 
   constructor(private containerService: ContainerService,
               public dialog: MatDialog,
+              private authService: AuthService,
               private _snackBar: MatSnackBar) {
-    this.role = 'Админ'
+    this.authService.getIsRole().subscribe(data => {
+      this.role = data.name;
+    });
   }
 
   ngOnInit(): void {

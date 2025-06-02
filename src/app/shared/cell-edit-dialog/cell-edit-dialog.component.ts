@@ -4,6 +4,7 @@ import {CellDtoType} from "../../../types/cellDto.type";
 import {CellService} from "../services/cell.service";
 import {TransportContainerService} from "../services/transport-container.service";
 import {CommonType} from "../../../types/common.type";
+import {AuthService} from "../../core/auth/auth.service";
 
 @Component({
   selector: 'app-cell-edit-dialog',
@@ -20,13 +21,16 @@ export class CellEditDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CellEditDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: CellDtoType,
               private cellService: CellService,
+              private authService: AuthService,
               private transportContainerService: TransportContainerService) {
     this.cellName = data.transportContainer.name;
     this.transportContainerService.getAllTransportContainer().subscribe(data => {
       this.transportContainers = data;
       console.log(this.transportContainers)
     })
-    this.role = 'Админ';
+    this.authService.getIsRole().subscribe(data => {
+      this.role = data.name
+    });
     this.transportContainerControl = data.transportContainer.id
   }
 
@@ -41,7 +45,7 @@ export class CellEditDialogComponent implements OnInit {
       storageId: this.data.storage.id
     }
 
-    if (this.role === 'Админ') {
+    // if (this.role === 'Админ') {
       if (this.data.id) {
         this.cellService.updateCellById(this.data.id, params).subscribe(data => {
           this.dialogRef.close('update')
@@ -51,9 +55,9 @@ export class CellEditDialogComponent implements OnInit {
           this.dialogRef.close('add')
         })
       }
-    } else {
-      this.dialogRef.close('send')
-    }
+    // } else {
+    //   this.dialogRef.close('send')
+    // }
   }
 
 }

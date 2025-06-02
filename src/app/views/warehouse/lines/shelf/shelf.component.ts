@@ -10,6 +10,7 @@ import {ShelfService} from "../../../../shared/services/shelf.service";
 import {CreateUpdateLineDialogComponent} from "../create-update-line-dialog/create-update-line-dialog.component";
 import {CreateUpdateShelfDialogComponent} from "./create-update-shelf-dialog/create-update-shelf-dialog.component";
 import {LineType} from "../../../../../types/line.type";
+import {AuthService} from "../../../../core/auth/auth.service";
 
 @Component({
   selector: 'app-shelf',
@@ -27,9 +28,12 @@ export class ShelfComponent implements OnInit {
   constructor(private lineService: LineService,
               private shelfService: ShelfService,
               private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
               public dialog: MatDialog,
               private _snackBar: MatSnackBar) {
-    this.role = 'Админ'
+    this.authService.getIsRole().subscribe(data => {
+      this.role = data.name
+    });
   }
 
   ngOnInit(): void {
@@ -84,6 +88,7 @@ export class ShelfComponent implements OnInit {
       if (result) {
         if (result === 'send') {
           this._snackBar.open('Запрос отправлен на редактирование')
+          this.loadCellsByShelfId(shelfId)
         } else if (result === 'update') {
           this._snackBar.open('Ячейка успешно обновлена')
           this.loadCellsByShelfId(shelfId)

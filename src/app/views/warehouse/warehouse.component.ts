@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CreateUpdateDialogComponent} from "./create-update-dialog/create-update-dialog.component";
 import {WarehouseType} from "../../../types/warehouse.type";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AuthService} from "../../core/auth/auth.service";
 
 @Component({
   selector: 'app-warehouse',
@@ -17,8 +18,11 @@ export class WarehouseComponent implements OnInit {
 
   constructor(private warehouseService: WarehouseService,
               public dialog: MatDialog,
+              private authService: AuthService,
               private _snackBar: MatSnackBar) {
-    this.role = 'Админ'
+    this.authService.getIsRole().subscribe(data => {
+      this.role = data.name
+    });
   }
 
   ngOnInit(): void {

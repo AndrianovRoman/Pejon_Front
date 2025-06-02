@@ -7,6 +7,7 @@ import {CellEditDialogComponent} from "../cell-edit-dialog/cell-edit-dialog.comp
 import {WarehouseService} from "../services/warehouse.service";
 import {ZoneService} from "../services/zone.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AuthService} from "../../core/auth/auth.service";
 
 @Component({
   selector: 'app-cells',
@@ -27,9 +28,12 @@ export class CellsComponent implements OnInit {
   constructor(private containerService: ContainerService,
               private zoneService: ZoneService,
               private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
               public dialog: MatDialog,
               private _snackBar: MatSnackBar) {
-    this.role = 'Админ'
+    this.authService.getIsRole().subscribe(data => {
+      this.role = data.name
+    });
   }
 
   ngOnInit(): void {

@@ -1,1 +1,29 @@
-<p>user-details works!</p>
+<div class="profile" [formGroup]="profileForm">
+  <div class="container">
+    <div class="auth-form">
+      <div class="auth-title">
+        Вход
+      </div>
+      <div class="auth-inputs">
+
+
+        <div class="auth-input">
+          <input type="text" class="input" readonly
+                 [ngStyle]="{'border-color': profileForm.get('name')?.invalid
+                  && (profileForm.get('name')?.dirty || profileForm.get('name')?.touched) ? 'red' : ''}"
+                 placeholder="Name" formControlName="name">
+        </div>
+        <div class="auth-input">
+          <input type="text" class="input" readonly
+                 [ngStyle]="{'border-color': profileForm.get('login')?.invalid
+                  && (profileForm.get('login')?.dirty || profileForm.get('login')?.touched) ? 'red' : ''}"
+                 placeholder="Login" formControlName="login">
+        </div>
+
+      </div>
+<!--      <div class="auth-button">-->
+<!--        <button class="button" [disabled]="!(profileForm.dirty && profileForm.valid)" (click)="update()">Редактировать</button>-->
+<!--      </div>-->
+    </div>
+  </div>
+</div>
