@@ -12,7 +12,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class LoginComponent implements OnInit {
 
   loginForm = this.fb.group({
-    login: ['', [Validators.email, Validators.required]],
+    login: ['', Validators.required],
+    // login: ['', [Validators.email, Validators.required]],
     // password: ['', [Validators.required, Validators.pattern('^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$')]],
     password: ['', Validators.required]
   })

@@ -58,10 +58,18 @@ export class LayoutComponent implements OnInit {
     this.isLogged = this.authService.getIsLoggedIn();
     this.userId = this.authService.getUserInfo();
     // console.log(this.isLogged)
-    this.authService.getIsRole().subscribe(data => {
-      this.role = data.name;
-      this.createNavbar()
-    });
+    let id = localStorage.getItem('id')
+    if (id) {
+      this.authService.getIsRole().subscribe(data => {
+        this.role = data.name;
+        this.createNavbar()
+      });
+    }
+    // this.authService.getIsRole().subscribe(data => {
+    //   this.role = data.name;
+    //   this.createNavbar()
+    // });
+    this.createNavbar()
   }
 
   ngOnInit(): void {
