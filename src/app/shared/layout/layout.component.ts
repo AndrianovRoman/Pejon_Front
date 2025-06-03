@@ -58,7 +58,10 @@ export class LayoutComponent implements OnInit {
     this.isLogged = this.authService.getIsLoggedIn();
     this.userId = this.authService.getUserInfo();
     // console.log(this.isLogged)
-    this.createNavbar()
+    this.authService.getIsRole().subscribe(data => {
+      this.role = data.name;
+      this.createNavbar()
+    });
   }
 
   ngOnInit(): void {
@@ -66,11 +69,15 @@ export class LayoutComponent implements OnInit {
 
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
       this.isLogged = isLoggedIn;
-      this.createNavbar()
-      // console.log(this.isLogged)
-      this.authService.getIsRole().subscribe(data => {
-        this.role = data.name
-      });
+      this.userId = this.authService.getUserInfo();
+      console.log(this.isLogged)
+      if(this.isLogged) {
+        this.authService.getIsRole().subscribe(data => {
+          this.role = data.name;
+          this.createNavbar()
+        });
+      }
+      this.createNavbar();
     });
   }
 
