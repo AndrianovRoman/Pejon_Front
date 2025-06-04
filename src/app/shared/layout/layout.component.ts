@@ -110,7 +110,7 @@ export class LayoutComponent implements OnInit {
         isLogged: this.isLogged,
       },
       {
-        routeLink: '/user',
+        routeLink: '/users',
         icon: 'bi bi-people',
         label: 'Пользователи',
         isLogged: this.isLogged && this.role === 'Админ',

@@ -31,7 +31,7 @@ export class CellEditDialogComponent implements OnInit {
     this.authService.getIsRole().subscribe(data => {
       this.role = data.name
     });
-    this.transportContainerControl = data.transportContainer.id
+    this.transportContainerControl = data.transportContainer.id ? data.transportContainer.id : 0
   }
 
   ngOnInit(): void {
